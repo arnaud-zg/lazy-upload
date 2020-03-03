@@ -1,0 +1,37 @@
+{
+  "name": "playground-lazy-upload",
+  "version": "0.0.0",
+  "description": "Playground of lazy-upload",
+  "repository": "git@github.com:arnaud-zg/lazy-upload.git",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "deploy": "rimraf out && yarn build-storybook && touch out/.nojekyll && gh-pages -t -d out -b gh-pages"
+  },
+  "keywords": [],
+  "author": "Arnaud Zheng <arnaud-zg@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.8.6",
+    "@storybook/addon-actions": "^5.3.14",
+    "@storybook/addon-links": "^5.3.14",
+    "@storybook/addons": "^5.3.14",
+    "@storybook/preset-scss": "^1.0.2",
+    "@storybook/preset-typescript": "^1.2.0",
+    "@storybook/react": "^5.3.14",
+    "autoprefixer": "^9.7.4",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.4.2",
+    "gh-pages": "^2.2.0",
+    "react-docgen-typescript-loader": "^3.6.0",
+    "rimraf": "^3.0.2",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.1.3",
+    "tailwindcss": "^1.2.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.8.3"
+  }
+}
