@@ -7,8 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "deploy": "rimraf out && yarn build-storybook && touch out/.nojekyll && gh-pages -t -d out -b gh-pages"
+    "build-storybook": "build-storybook --output-dir dist",
+    "deploy": "rimraf dist && yarn build-storybook && touch dist/.nojekyll && gh-pages -t -d dist -b gh-pages"
   },
   "keywords": [],
   "author": "Arnaud Zheng <arnaud-zg@users.noreply.github.com>",
