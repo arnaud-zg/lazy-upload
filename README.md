@@ -1,2 +1,3 @@
 # lazy-upload
-Lazy Upload Hook
+
+lazy-upload is a library which aims to simplify the file upload flow
