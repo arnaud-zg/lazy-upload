@@ -14,7 +14,10 @@ export const SimpleFileUpload = () => {
   return (
     <Layout>
       <Title>
-        Simple file upload with <Text highlight>useLazyUpload</Text>
+        Simple file upload with{" "}
+        <Text highlight inline>
+          useLazyUpload
+        </Text>
       </Title>
       <Box withBorder isLoading={isLoading}>
         <form
@@ -66,7 +69,10 @@ export const MultipleFileUpload = () => {
   return (
     <Layout>
       <Title>
-        Multiple file upload with <Text highlight>useLazyUpload</Text>
+        Multiple file upload with{" "}
+        <Text highlight inline>
+          useLazyUpload
+        </Text>
       </Title>
       <Box withBorder isLoading={isLoading}>
         <form
