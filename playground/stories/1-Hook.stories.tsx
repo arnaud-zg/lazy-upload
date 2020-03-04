@@ -3,14 +3,13 @@ import { useLazyUpload } from "../../library/dist";
 import { Box } from "../src/common/Box";
 import { Button } from "../src/common/Button";
 import { FileListInfo } from "../src/common/File/FileListInfo";
-import { fakeFileListUpload } from "../src/common/form";
 import { Layout } from "../src/common/Layout";
 import { Text } from "../src/common/Text";
 import { Title } from "../src/common/Title";
 
 export const SimpleFileUpload = () => {
   const { attributes, fileList, resetFileList } = useLazyUpload({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   return (
     <Layout>
       <Title>
@@ -24,18 +23,6 @@ export const SimpleFileUpload = () => {
           className="flex flex-col"
           onSubmit={e => {
             e.preventDefault();
-            setIsLoading(true);
-            fakeFileListUpload({ fileList }).then(({ config }) => {
-              resetFileList();
-              alert(
-                `${
-                  fileList.length
-                } files has been uploaded with configuration ${JSON.stringify(
-                  config
-                )}`
-              );
-              setIsLoading(false);
-            });
           }}
         >
           <label htmlFor="simple-file-upload">Choose a file:</label>
@@ -46,7 +33,13 @@ export const SimpleFileUpload = () => {
           />
           {!!fileList.length && (
             <div className="self-end">
-              <Button>Send</Button>
+              <Button
+                onClick={() => {
+                  resetFileList();
+                }}
+              >
+                Clear
+              </Button>
             </div>
           )}
         </form>
@@ -65,7 +58,7 @@ export const MultipleFileUpload = () => {
   const { attributes, fileList, resetFileList } = useLazyUpload({
     multiple: true
   });
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   return (
     <Layout>
       <Title>
@@ -79,18 +72,6 @@ export const MultipleFileUpload = () => {
           className="flex flex-col"
           onSubmit={e => {
             e.preventDefault();
-            setIsLoading(true);
-            fakeFileListUpload({ fileList }).then(({ config }) => {
-              resetFileList();
-              alert(
-                `${
-                  fileList.length
-                } files has been uploaded with configuration ${JSON.stringify(
-                  config
-                )}`
-              );
-              setIsLoading(false);
-            });
           }}
         >
           <label htmlFor="multiple-file-upload">Choose files:</label>
@@ -101,7 +82,13 @@ export const MultipleFileUpload = () => {
           />
           {!!fileList.length && (
             <div className="self-end">
-              <Button>Send</Button>
+              <Button
+                onClick={() => {
+                  resetFileList();
+                }}
+              >
+                Clear
+              </Button>
             </div>
           )}
         </form>
