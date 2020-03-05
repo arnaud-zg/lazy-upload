@@ -6,7 +6,11 @@ interface TextProps {
 }
 
 export const Text: FC<TextProps> = ({ children, highlight, inline }) => (
-  <p className={`${inline ? " inline" : ""}${highlight ? " bg-gray-300" : ""}`}>
+  <p
+    className={`${inline ? " inline" : ""}${
+      highlight ? " bg-gray-300 px-1" : ""
+    }`}
+  >
     {children}
   </p>
 );

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLazyUpload } from "../../library/dist";
+import { useLazyUpload, uploadFiles } from "../../library/dist";
 import { Box } from "../src/common/Box";
 import { Button } from "../src/common/Button";
 import { FileListInfo } from "../src/common/File/FileListInfo";
@@ -10,6 +10,7 @@ import { Title } from "../src/common/Title";
 export const SimpleFileUpload = () => {
   const { attributes, fileList, resetFileList } = useLazyUpload({});
   const [isLoading] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState<any>([]);
   return (
     <Layout>
       <Title>
@@ -22,6 +23,24 @@ export const SimpleFileUpload = () => {
         <form
           className="flex flex-col"
           onSubmit={e => {
+            uploadFiles<{ files: {} }>({
+              config: {
+                url: "https://lazy-upload-server.now.sh/api/files",
+                method: "POST"
+              },
+              fileList
+            })
+              .then(({ data }) => {
+                alert("The file has been uploaded.");
+                setUploadedFiles([
+                  ...uploadedFiles,
+                  ...Object.values(data.files)
+                ]);
+                resetFileList();
+              })
+              .catch(() => {
+                alert("Cannot upload file");
+              });
             e.preventDefault();
           }}
         >
@@ -40,6 +59,7 @@ export const SimpleFileUpload = () => {
               >
                 Clear
               </Button>
+              <Button type="submit">Send</Button>
             </div>
           )}
         </form>
@@ -59,6 +79,7 @@ export const MultipleFileUpload = () => {
     multiple: true
   });
   const [isLoading] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState<any>([]);
   return (
     <Layout>
       <Title>
@@ -71,6 +92,24 @@ export const MultipleFileUpload = () => {
         <form
           className="flex flex-col"
           onSubmit={e => {
+            uploadFiles<{ files: {} }>({
+              config: {
+                url: "https://lazy-upload-server.now.sh/api/files",
+                method: "POST"
+              },
+              fileList
+            })
+              .then(({ data }) => {
+                alert("The file has been uploaded.");
+                setUploadedFiles([
+                  ...uploadedFiles,
+                  ...Object.values(data.files)
+                ]);
+                resetFileList();
+              })
+              .catch(() => {
+                alert("Cannot upload file");
+              });
             e.preventDefault();
           }}
         >
@@ -89,6 +128,7 @@ export const MultipleFileUpload = () => {
               >
                 Clear
               </Button>
+              <Button type="submit">Send</Button>
             </div>
           )}
         </form>

@@ -1,9 +1,4 @@
-import React, {
-  InputHTMLAttributes,
-  useCallback,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
 interface useLazyUploadProps {
   multiple?: boolean;
@@ -16,7 +11,8 @@ export const useLazyUpload = ({ multiple = false }: useLazyUploadProps) => {
       setFileList(Array.from<File>(e.target.files));
     }
   };
-  const ref = useRef<InputHTMLAttributes<HTMLInputElement>>();
+
+  const ref = useRef<HTMLInputElement | null>(null);
   const resetFileList = useCallback(() => {
     if (ref.current) {
       ref.current.value = '';
