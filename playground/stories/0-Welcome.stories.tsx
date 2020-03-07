@@ -3,7 +3,7 @@ import { Layout } from "../src/common/Layout";
 import { Text } from "../src/common/Text";
 import { Title } from "../src/common/Title";
 import { Box } from "../src/common/Box";
-import { withLinks, linkTo } from "@storybook/addon-links";
+import { linkTo } from "@storybook/addon-links";
 
 export const ToStorybook = () => (
   <Layout>
@@ -51,6 +51,5 @@ ToStorybook.story = {
 };
 
 export default {
-  title: "Welcome",
-  decorators: [withLinks]
+  title: "Welcome"
 };

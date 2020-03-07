@@ -226,6 +226,6 @@ export const MultipleFileUpload = () => {
 };
 
 export default {
-  title: "Hooks/File Upload/Without validation",
+  title: "Hooks/File Upload/Without Validation",
   component: SimpleFileUpload
 };
