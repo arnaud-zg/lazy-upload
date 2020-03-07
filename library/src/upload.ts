@@ -1,4 +1,4 @@
-import axios, { AxiosPromise, AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, AxiosError } from 'axios';
 
 export enum ContentType {
   FORM_DATA = 'multipart/form-data',
@@ -10,7 +10,21 @@ interface uploadFilesProps {
   fileList: File[];
 }
 
-export const uploadFiles = <T = any>({
+interface Files {
+  [fileName: string]: File;
+}
+
+interface FileListGeneric {
+  files: Files;
+}
+
+export interface uploadFilesResponse<FileList = FileListGeneric> {
+  uploadedFiles: FileList;
+  rejectedFiles: File[];
+  error?: AxiosError;
+}
+
+export const uploadFiles = <FileList = FileListGeneric>({
   config,
   data,
   fileList,
@@ -28,5 +42,16 @@ export const uploadFiles = <T = any>({
     ...config,
     data: formData,
     headers: { 'Content-Type': ContentType.FORM_DATA },
-  }) as AxiosPromise<T>;
+  })
+    .then(({ data }: { data: FileListGeneric }) => ({
+      uploadedFiles: data,
+      rejectedFiles: [],
+    }))
+    .catch((error: AxiosError) =>
+      Promise.reject({
+        uploadedFiles: {},
+        rejectedFiles: fileList,
+        error,
+      })
+    ) as Promise<uploadFilesResponse<FileList>>;
 };
