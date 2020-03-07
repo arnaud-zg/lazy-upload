@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import {
-  useLazyUpload,
   uploadFiles,
-  uploadFilesResponse
-} from "../../library/dist";
-import { Box } from "../src/common/Box";
-import { Button } from "../src/common/Button";
-import { FileListInfo } from "../src/File/FileListInfo";
-import { Layout } from "../src/common/Layout";
-import { Text } from "../src/common/Text";
-import { Title } from "../src/common/Title";
-import { useUpload } from "../src/Upload/useUpload";
-import { Progress } from "../src/Upload/Progress";
+  uploadFilesResponse,
+  useLazyUpload
+} from "../../../../../library/dist";
+import { Box } from "../../../../src/common/Box";
+import { Button } from "../../../../src/common/Button";
+import { Layout } from "../../../../src/common/Layout";
+import { Tags, TagsEnum } from "../../../../src/common/Tags";
+import { Text } from "../../../../src/common/Text";
+import { Title } from "../../../../src/common/Title";
+import { FileListInfo } from "../../../../src/File/FileListInfo";
+import { Progress } from "../../../../src/Upload/Progress";
+import { useUpload } from "../../../../src/Upload/useUpload";
+
+const UPLOAD_FILES_URL = "https://lazy-upload-server.now.sh/api/files";
 
 export const SimpleFileUpload = () => {
   const { attributes, fileList, resetFileList } = useLazyUpload({});
@@ -28,13 +31,20 @@ export const SimpleFileUpload = () => {
           useLazyUpload
         </Text>
       </Title>
+      <Tags
+        tagList={[
+          TagsEnum.SIMPLE,
+          TagsEnum.FILE_UPLOAD,
+          TagsEnum.WITHOUT_VALIDATION
+        ]}
+      />
       <Box withBorder isLoading={isLoading}>
         <form
           className="flex flex-col"
           onSubmit={e => {
             uploadFiles({
               config: {
-                url: "https://lazy-upload-server.now.sh/api/files",
+                url: UPLOAD_FILES_URL,
                 method: "POST",
                 onUploadProgress: setProgressEvent
               },
@@ -126,13 +136,20 @@ export const MultipleFileUpload = () => {
           useLazyUpload
         </Text>
       </Title>
+      <Tags
+        tagList={[
+          TagsEnum.MULTIPLE,
+          TagsEnum.FILE_UPLOAD,
+          TagsEnum.WITHOUT_VALIDATION
+        ]}
+      />
       <Box withBorder isLoading={isLoading}>
         <form
           className="flex flex-col"
           onSubmit={e => {
             uploadFiles({
               config: {
-                url: "https://lazy-upload-server.now.sh/api/files",
+                url: UPLOAD_FILES_URL,
                 method: "POST",
                 onUploadProgress: setProgressEvent
               },
@@ -209,6 +226,6 @@ export const MultipleFileUpload = () => {
 };
 
 export default {
-  title: "Hooks",
+  title: "Hooks/File Upload/Without validation",
   component: SimpleFileUpload
 };

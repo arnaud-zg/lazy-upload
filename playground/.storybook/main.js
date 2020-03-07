@@ -23,7 +23,8 @@ module.exports = {
           localIdentName: "[name]__[local]--[hash:base64:5]"
         }
       }
-    }
+    },
+    "@storybook/addon-links/register"
   ],
   stories: ["../stories/**/*.stories.[tj]sx"]
 };
