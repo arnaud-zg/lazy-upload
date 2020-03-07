@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { FileItemName } from "./FileItemName";
-import { Text } from "../../common/Text";
+import { Text } from "../common/Text";
 
 interface FileItemProps {
   file: File;

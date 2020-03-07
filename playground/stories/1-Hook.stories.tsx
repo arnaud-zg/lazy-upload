@@ -1,16 +1,25 @@
 import React, { useState } from "react";
-import { useLazyUpload, uploadFiles } from "../../library/dist";
+import {
+  useLazyUpload,
+  uploadFiles,
+  uploadFilesResponse
+} from "../../library/dist";
 import { Box } from "../src/common/Box";
 import { Button } from "../src/common/Button";
-import { FileListInfo } from "../src/common/File/FileListInfo";
+import { FileListInfo } from "../src/File/FileListInfo";
 import { Layout } from "../src/common/Layout";
 import { Text } from "../src/common/Text";
 import { Title } from "../src/common/Title";
+import { useUpload } from "../src/Upload/useUpload";
+import { Progress } from "../src/Upload/Progress";
 
 export const SimpleFileUpload = () => {
   const { attributes, fileList, resetFileList } = useLazyUpload({});
   const [isLoading] = useState(false);
-  const [uploadedFiles, setUploadedFiles] = useState<any>([]);
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const [rejectedFiles, setRejectedFiles] = useState<File[]>([]);
+  const { uploadState, setProgressEvent, resetProgress } = useUpload();
+
   return (
     <Layout>
       <Title>
@@ -23,23 +32,26 @@ export const SimpleFileUpload = () => {
         <form
           className="flex flex-col"
           onSubmit={e => {
-            uploadFiles<{ files: {} }>({
+            uploadFiles({
               config: {
                 url: "https://lazy-upload-server.now.sh/api/files",
-                method: "POST"
+                method: "POST",
+                onUploadProgress: setProgressEvent
               },
               fileList
             })
-              .then(({ data }) => {
-                alert("The file has been uploaded.");
+              .then(({ uploadedFiles: { files: uploadedFilesResponse } }) => {
                 setUploadedFiles([
                   ...uploadedFiles,
-                  ...Object.values(data.files)
+                  ...Object.values<File>(uploadedFilesResponse)
                 ]);
                 resetFileList();
+                resetProgress();
               })
-              .catch(() => {
-                alert("Cannot upload file");
+              .catch(({ rejectedFiles }: uploadFilesResponse) => {
+                setRejectedFiles([...uploadedFiles, ...rejectedFiles]);
+                resetFileList();
+                resetProgress();
               });
             e.preventDefault();
           }}
@@ -50,24 +62,47 @@ export const SimpleFileUpload = () => {
             id="simple-file-upload"
             name="simple-file-upload"
           />
-          {!!fileList.length && (
-            <div className="self-end">
+          <div className="self-end">
+            {(!!fileList.length ||
+              !!uploadedFiles.length ||
+              !!rejectedFiles.length) && (
               <Button
                 onClick={() => {
                   resetFileList();
+                  setUploadedFiles([]);
+                  setRejectedFiles([]);
+                  resetProgress();
                 }}
               >
                 Clear
               </Button>
-              <Button type="submit">Send</Button>
-            </div>
-          )}
+            )}
+            {!!fileList.length && <Button type="submit">Send</Button>}
+          </div>
         </form>
       </Box>
       {!!fileList.length && (
+        <>
+          <Box withBorder>
+            <Title>Upload progress</Title>
+            <Progress percentValue={uploadState.percentUploaded} />
+          </Box>
+          <Box withBorder>
+            <Title>List of preloaded files</Title>
+            <FileListInfo fileList={fileList} />
+          </Box>
+        </>
+      )}
+      {!!uploadedFiles.length && (
         <Box withBorder>
-          <Title>List of preloaded files</Title>
-          <FileListInfo fileList={fileList} />
+          <Title>List of uploaded files</Title>
+          <FileListInfo fileList={uploadedFiles} />
+        </Box>
+      )}
+      {!!rejectedFiles.length && (
+        <Box withBorder>
+          <Title>List of rejected files</Title>
+          <FileListInfo fileList={rejectedFiles} />
         </Box>
       )}
     </Layout>
@@ -79,7 +114,10 @@ export const MultipleFileUpload = () => {
     multiple: true
   });
   const [isLoading] = useState(false);
-  const [uploadedFiles, setUploadedFiles] = useState<any>([]);
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const [rejectedFiles, setRejectedFiles] = useState<File[]>([]);
+  const { uploadState, setProgressEvent, resetProgress } = useUpload();
+
   return (
     <Layout>
       <Title>
@@ -92,24 +130,28 @@ export const MultipleFileUpload = () => {
         <form
           className="flex flex-col"
           onSubmit={e => {
-            uploadFiles<{ files: {} }>({
+            uploadFiles({
               config: {
                 url: "https://lazy-upload-server.now.sh/api/files",
-                method: "POST"
+                method: "POST",
+                onUploadProgress: setProgressEvent
               },
               fileList
             })
-              .then(({ data }) => {
-                alert("The file has been uploaded.");
+              .then(({ uploadedFiles: { files: uploadedFilesResponse } }) => {
                 setUploadedFiles([
                   ...uploadedFiles,
-                  ...Object.values(data.files)
+                  ...Object.values<File>(uploadedFilesResponse)
                 ]);
                 resetFileList();
+                resetProgress();
               })
-              .catch(() => {
-                alert("Cannot upload file");
+              .catch(({ rejectedFiles }: uploadFilesResponse) => {
+                setRejectedFiles([...uploadedFiles, ...rejectedFiles]);
+                resetFileList();
+                resetProgress();
               });
+
             e.preventDefault();
           }}
         >
@@ -119,24 +161,47 @@ export const MultipleFileUpload = () => {
             id="multiple-file-upload"
             name="multiple-file-upload"
           />
-          {!!fileList.length && (
-            <div className="self-end">
+          <div className="self-end">
+            {(!!fileList.length ||
+              !!uploadedFiles.length ||
+              !!rejectedFiles.length) && (
               <Button
                 onClick={() => {
                   resetFileList();
+                  setUploadedFiles([]);
+                  setRejectedFiles([]);
+                  resetProgress();
                 }}
               >
                 Clear
               </Button>
-              <Button type="submit">Send</Button>
-            </div>
-          )}
+            )}
+            {!!fileList.length && <Button type="submit">Send</Button>}
+          </div>
         </form>
       </Box>
       {!!fileList.length && (
+        <>
+          <Box withBorder>
+            <Title>Upload progress</Title>
+            <Progress percentValue={uploadState.percentUploaded} />
+          </Box>
+          <Box withBorder>
+            <Title>List of preloaded files</Title>
+            <FileListInfo fileList={fileList} />
+          </Box>
+        </>
+      )}
+      {!!uploadedFiles.length && (
         <Box withBorder>
-          <Title>List of preloaded files</Title>
-          <FileListInfo fileList={fileList} />
+          <Title>List of uploaded files</Title>
+          <FileListInfo fileList={uploadedFiles} />
+        </Box>
+      )}
+      {!!rejectedFiles.length && (
+        <Box withBorder>
+          <Title>List of rejected files</Title>
+          <FileListInfo fileList={rejectedFiles} />
         </Box>
       )}
     </Layout>
