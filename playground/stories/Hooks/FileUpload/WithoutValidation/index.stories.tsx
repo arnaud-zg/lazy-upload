@@ -14,7 +14,7 @@ import { FileListInfo } from "../../../../src/File/FileListInfo";
 import { Progress } from "../../../../src/Upload/Progress";
 import { useUpload } from "../../../../src/Upload/useUpload";
 
-const UPLOAD_FILES_URL = "http://localhost:3000/api/files";
+const UPLOAD_FILES_URL = "https://lazy-upload-server.now.sh/api/files";
 
 export const SimpleFileUpload = () => {
   const { attributes, fileList, resetFileList } = useLazyUpload({});
