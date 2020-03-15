@@ -1,10 +1,10 @@
 import axios, { AxiosRequestConfig, AxiosError } from 'axios';
 
-export enum ContentType {
+enum ContentType {
   FORM_DATA = 'multipart/form-data',
 }
 
-interface uploadFilesProps {
+export interface UploadFilesProps {
   config: AxiosRequestConfig;
   data?: { [key: string]: string };
   fileList: File[];
@@ -18,7 +18,7 @@ interface FileListGeneric {
   files: Files;
 }
 
-export interface uploadFilesResponse<FileList = FileListGeneric> {
+interface UploadFilesResponse<FileList = FileListGeneric> {
   uploadedFiles: FileList;
   rejectedFiles: File[];
   error?: AxiosError;
@@ -28,7 +28,7 @@ export const uploadFiles = <FileList = FileListGeneric>({
   config,
   data,
   fileList,
-}: uploadFilesProps) => {
+}: UploadFilesProps) => {
   const formData = new FormData();
   if (data) {
     Object.keys(data).forEach(fieldKey => {
@@ -53,5 +53,5 @@ export const uploadFiles = <FileList = FileListGeneric>({
         rejectedFiles: fileList,
         error,
       })
-    ) as Promise<uploadFilesResponse<FileList>>;
+    ) as Promise<UploadFilesResponse<FileList>>;
 };

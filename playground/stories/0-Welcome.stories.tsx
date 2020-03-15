@@ -17,7 +17,7 @@ export const ToStorybook = () => (
     <Box>
       <div className="flex flex-col">
         <div className="flex">
-          <Title>Table of contents</Title>
+          <Title>Quick access</Title>
         </div>
         <div className="flex justify-center mt-4">
           <div className="overflow-hidden max-w-xs w-full shadow-lg">

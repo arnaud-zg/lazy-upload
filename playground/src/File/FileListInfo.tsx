@@ -7,8 +7,8 @@ interface FileListInfoProps {
 
 export const FileListInfo: FC<FileListInfoProps> = ({ fileList }) => (
   <ul>
-    {fileList.map(file => (
-      <FileItem key={file.name} file={file} />
+    {fileList.map((file, index) => (
+      <FileItem key={`${file.name}-${index}`} file={file} />
     ))}
   </ul>
 );

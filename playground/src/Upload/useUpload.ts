@@ -2,10 +2,9 @@ import { useState, useCallback, useMemo } from "react";
 
 interface UseUploadState {
   percentUploaded: number;
-  // progressEvent: ProgressEvent | null;
 }
 
-type SetProgressEventPayload = ProgressEvent;
+export type SetProgressEventPayload = ProgressEvent;
 
 const initialState = { percentUploaded: 0 };
 

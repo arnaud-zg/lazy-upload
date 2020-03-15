@@ -23,6 +23,7 @@
     "@storybook/preset-typescript": "^1.2.0",
     "@storybook/react": "^5.3.14",
     "autoprefixer": "^9.7.4",
+    "axios": "^0.19.2",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.4.2",
     "gh-pages": "^2.2.0",
