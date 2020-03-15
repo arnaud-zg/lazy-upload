@@ -1,0 +1,22 @@
+{
+  "name": "root-lazy-upload",
+  "version": "0.0.0",
+  "private": true,
+  "repository": "git@github.com:arnaud-zg/lazy-upload.git",
+  "author": "Arnaud Zheng <arnaud-zg@users.noreply.github.com>",
+  "scripts": {
+    "start:library": "yarn workspace lazy-upload start",
+    "build:library": "yarn workspace lazy-upload build",
+    "test:library": "yarn workspace lazy-upload test",
+    "lint:library": "yarn workspace lazy-upload lint",
+    "test:playground": "yarn workspace playground-lazy-upload test",
+    "start:playground": "yarn workspace playground-lazy-upload storybook",
+    "build:playground": "yarn workspace playground-lazy-upload build-storybook",
+    "deploy:playground": "yarn workspace playground-lazy-upload deploy"
+  },
+  "license": "MIT",
+  "workspaces": [
+    "library",
+    "playground"
+  ]
+}
