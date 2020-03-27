@@ -25,6 +25,4 @@ jobs:
         api_key: $NPM_TOKEN
         skip_cleanup: true
         on:
-          branch: ci-deploy
-        on:
           tags: true
