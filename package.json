@@ -5,6 +5,7 @@
   "repository": "git@github.com:arnaud-zg/lazy-upload.git",
   "author": "Arnaud Zheng <arnaud-zg@users.noreply.github.com>",
   "scripts": {
+    "test": "yarn test:library",
     "start:library": "yarn workspace lazy-upload start",
     "build:library": "yarn workspace lazy-upload build",
     "test:library": "yarn workspace lazy-upload test",

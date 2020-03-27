@@ -1,0 +1,30 @@
+language: node_js
+
+node_js:
+  - 10
+
+before_script:
+  - echo "Start CI"
+
+jobs:
+  include:
+    - stage: Install dependencies
+      script: yarn install --check-files
+    - stage: Lint, Test, Build
+      script:
+        - yarn lint:library
+        - yarn test:library
+        - yarn build:library
+    - stage: Npm release
+      script:
+        - if [ ! -d ./library/dist ]; then yarn build:library ; fi
+        - cd library
+      deploy:
+        provider: npm
+        email: $NPM_AUTHOR_EMAIL
+        api_key: $NPM_TOKEN
+        skip_cleanup: true
+        on:
+          branch: ci-deploy
+        # on:
+        #   tags: true
