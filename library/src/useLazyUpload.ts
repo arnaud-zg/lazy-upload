@@ -112,7 +112,7 @@ export const useLazyUpload = ({
             uploadedFiles,
           })
         ),
-    [ref, rejectedFiles, uploadedFiles]
+    [pendingFiles, ref, rejectedFiles, uploadedFiles, uploadFiles]
   );
   return {
     attributes: {
