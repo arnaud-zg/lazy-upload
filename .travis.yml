@@ -26,5 +26,5 @@ jobs:
         skip_cleanup: true
         on:
           branch: ci-deploy
-        # on:
-        #   tags: true
+        on:
+          tags: true
