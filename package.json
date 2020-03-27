@@ -13,11 +13,15 @@
     "test:playground": "yarn workspace playground-lazy-upload test",
     "start:playground": "yarn workspace playground-lazy-upload storybook",
     "build:playground": "yarn workspace playground-lazy-upload build-storybook",
-    "deploy:playground": "yarn workspace playground-lazy-upload deploy"
+    "deploy:playground": "yarn workspace playground-lazy-upload deploy",
+    "release": "standard-version"
   },
   "license": "MIT",
   "workspaces": [
     "library",
     "playground"
-  ]
+  ],
+  "devDependencies": {
+    "standard-version": "^7.1.0"
+  }
 }
