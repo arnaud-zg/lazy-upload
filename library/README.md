@@ -1,167 +1,120 @@
-# TSDX React User Guide
+<h1 align="center">Welcome to lazy-upload 👋</h1>
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+<p>lazy-upload is a library which aims to simplify the file upload flow</p>
 
-> This TSDX setup is meant for developing React components (not apps!) that can be published to NPM. If you’re looking to build an app, you should use `create-react-app`, `razzle`, `nextjs`, `gatsby`, or `react-static`.
+<p>
+  <a href="https://www.npmjs.com/package/lazy-upload" target="_blank">
+    <img alt="Version" src="https://img.shields.io/npm/v/lazy-upload.svg">
+  </a>
+  <img alt="Commit Activity" src="https://img.shields.io/github/commit-activity/m/arnaud-zg/lazy-upload" />
+  <a href="https://travis-ci.org/arnaud-zg/lazy-upload" target="_blank">
+    <img alt="Build Status" src="https://travis-ci.org/arnaud-zg/lazy-upload.svg?branch=develop" />
+  </a>
+  <a href="https://bundlephobia.com/result?p=lazy-upload" target="_blank">
+    <img alt="Bundle Size" src="https://badgen.net/bundlephobia/min/lazy-upload" />
+  </a>
+</p>
 
-> If you’re new to TypeScript and React, checkout [this handy cheatsheet](https://github.com/sw-yx/react-typescript-cheatsheet/)
+### Installing
 
-## Commands
+Using npm:
 
-TSDX scaffolds your new library inside `/src`, and also sets up a [Parcel-based](https://parceljs.org) playground for it inside `/example`.
-
-The recommended workflow is to run TSDX in one terminal:
-
-```
-npm start # or yarn start
-```
-
-This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
-
-Then run the example inside another:
-
-```
-cd example
-npm i # or yarn to install dependencies
-npm start # or yarn start
+```shell
+npm i --save lazy-upload
 ```
 
-The default example imports and live reloads whatever is in `/dist`, so if you are seeing an out of date component, make sure TSDX is running in watch mode like we recommend above. **No symlinking required**, [we use Parcel's aliasing](https://github.com/palmerhq/tsdx/pull/88/files).
+Using yarn:
 
-To do a one-off build, use `npm run build` or `yarn build`.
-
-To run tests, use `npm test` or `yarn test`.
-
-## Configuration
-
-Code quality is [set up for you](https://github.com/palmerhq/tsdx/pull/45/files) with `prettier`, `husky`, and `lint-staged`. Adjust the respective fields in `package.json` accordingly.
-
-### Jest
-
-Jest tests are set up to run with `npm test` or `yarn test`. This runs the test watcher (Jest) in an interactive mode. By default, runs tests related to files changed since the last commit.
-
-#### Setup Files
-
-This is the folder structure we set up for you:
-
-```
-/example
-  index.html
-  index.tsx       # test your component here in a demo app
-  package.json
-  tsconfig.json
-/src
-  index.tsx       # EDIT THIS
-/test
-  blah.test.tsx   # EDIT THIS
-.gitignore
-package.json
-README.md         # EDIT THIS
-tsconfig.json
+```shell
+yarn add --dev lazy-upload
 ```
 
-#### React Testing Library
+## Usage
 
-We do not set up `react-testing-library` for you yet, we welcome contributions and documentation on this.
+Here are examples of how you can use `lazy-upload`.
 
-### Rollup
+### useLazyUpload
 
-TSDX uses [Rollup v1.x](https://rollupjs.org) as a bundler and generates multiple rollup configs for various module formats and build settings. See [Optimizations](#optimizations) for details.
+> File upload hook
 
-### TypeScript
+#### Examples
 
-`tsconfig.json` is set up to interpret `dom` and `esnext` types, as well as `react` for `jsx`. Adjust according to your needs.
+##### Basic
 
-## Continuous Integration
+```ts
+const UPLOAD_FILES_URL = '';
 
-### Travis
-
-_to be completed_
-
-### Circle
-
-_to be completed_
-
-## Optimizations
-
-Please see the main `tsdx` [optimizations docs](https://github.com/palmerhq/tsdx#optimizations). In particular, know that you can take advantage of development-only optimizations:
-
-```js
-// ./types/index.d.ts
-declare var __DEV__: boolean;
-
-// inside your code...
-if (__DEV__) {
-  console.log('foo');
-}
+export const UploadField = () => {
+  const {
+    acceptedFiles,
+    attributes,
+    rejectedFiles,
+    reset,
+    upload,
+    uploadedFiles,
+  } = useLazyUpload({});
+  console.log({ rejectedFiles, uploadedFiles });
+  return (
+    <form
+      onSubmit={e => {
+        upload({
+          config: {
+            url: UPLOAD_FILES_URL,
+            method: 'POST',
+          },
+          fileList: acceptedFiles,
+        });
+        e.preventDefault();
+      }}
+    >
+      <label htmlFor="file-upload">Choose files:</label>
+      <input {...attributes} id="file-upload" name="file-upload" />
+      <button onClick={reset}>Reset</button>
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
 ```
 
-You can also choose to install and use [invariant](https://github.com/palmerhq/tsdx#invariant) and [warning](https://github.com/palmerhq/tsdx#warning) functions.
+## Running the tests
 
-## Module Formats
+Tests are written with jest
 
-CJS, ESModules, and UMD module formats are supported.
+### Unit tests
 
-The appropriate paths are configured in `package.json` and `dist/index.js` accordingly. Please report if any issues are found.
+Using jest:
 
-## Using the Playground
-
-```
-cd example
-npm i # or yarn to install dependencies
-npm start # or yarn start
+```shell
+yarn run test
 ```
 
-The default example imports and live reloads whatever is in `/dist`, so if you are seeing an out of date component, make sure TSDX is running in watch mode like we recommend above. **No symlinking required**!
+## Deployment
 
-## Deploying the Playground
+Deployment is done with Travis.
 
-The Playground is just a simple [Parcel](https://parceljs.org) app, you can deploy it anywhere you would normally deploy that. Here are some guidelines for **manually** deploying with the Netlify CLI (`npm i -g netlify-cli`):
+## Built With
 
-```bash
-cd example # if not already in the example folder
-npm run build # builds to dist
-netlify deploy # deploy the dist folder
-```
+- [TSDX](https://github.com/palmerhq/tsdx) - TSDX
+- [Storybook](https://github.com/storybookjs/storybook) - Storybook
 
-Alternatively, if you already have a git repo connected, you can set up continuous deployment with Netlify:
+## Contributing
 
-```bash
-netlify init
-# build command: yarn build && cd example && yarn && yarn build
-# directory to deploy: example/dist
-# pick yes for netlify.toml
-```
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Named Exports
+## Versioning
 
-Per Palmer Group guidelines, [always use named exports.](https://github.com/palmerhq/typescript#exports) Code split inside your React app instead of your React library.
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/arnaud-zg/lazy-upload/tags).
 
-## Including Styles
+## Authors
 
-There are many ways to ship styles, including with CSS-in-JS. TSDX has no opinion on this, configure how you like.
+- **Arnaud Zheng** - _Initial work_ - [arnaud-zg](https://github.com/arnaud-zg)
 
-For vanilla CSS, you can include it at the root directory and add it to the `files` section in your `package.json`, so that it can be imported separately by your users and run through their bundler's loader.
+See also the list of [contributors](https://github.com/arnaud-zg/lazy-upload/graphs/contributors) who participated in this project.
 
-## Publishing to NPM
+## Show your support
 
-We recommend using https://github.com/sindresorhus/np.
+Give a ⭐️ if this project helped you!
 
-## Usage with Lerna
+## License
 
-When creating a new package with TSDX within a project set up with Lerna, you might encounter a `Cannot resolve dependency` error when trying to run the `example` project. To fix that you will need to make changes to the `package.json` file _inside the `example` directory_.
-
-The problem is that due to the nature of how dependencies are installed in Lerna projects, the aliases in the example project's `package.json` might not point to the right place, as those dependencies might have been installed in the root of your Lerna project.
-
-Change the `alias` to point to where those packages are actually installed. This depends on the directory structure of your Lerna project, so the actual path might be different from the diff below.
-
-```diff
-   "alias": {
--    "react": "../node_modules/react",
--    "react-dom": "../node_modules/react-dom"
-+    "react": "../../../node_modules/react",
-+    "react-dom": "../../../node_modules/react-dom"
-   },
-```
-
-An alternative to fixing this problem would be to remove aliases altogether and define the dependencies referenced as aliases as dev dependencies instead. [However, that might cause other problems.](https://github.com/palmerhq/tsdx/issues/64)
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
