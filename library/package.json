@@ -1,6 +1,6 @@
 {
   "name": "lazy-upload",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "description": "Simplify the file upload flow",
   "repository": "git@github.com:arnaud-zg/lazy-upload.git",
   "main": "dist/index.js",
