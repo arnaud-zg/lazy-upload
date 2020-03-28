@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://github.com/arnaud-zg/lazy-upload/compare/v0.0.0...v0.1.0) (2020-03-28)
+
+
+### Bug Fixes
+
+* deploy on tag ([072e98c](https://github.com/arnaud-zg/lazy-upload/commit/072e98c6d0c9d82b7ec44d0ea3f08203f480a00a))
+
 ## 0.0.0 (2020-03-27)
 
 
