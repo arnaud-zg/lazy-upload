@@ -20,7 +20,7 @@
     "@storybook/addon-links": "5.3.14",
     "@storybook/addons": "5.3.14",
     "@storybook/preset-scss": "1.0.2",
-    "@storybook/preset-typescript": "1.2.0",
+    "@storybook/preset-typescript": "1.2.2",
     "@storybook/react": "5.3.14",
     "autoprefixer": "9.7.4",
     "axios": "0.19.2",
