@@ -2,10 +2,21 @@
   "name": "lazy-upload",
   "version": "0.2.0",
   "description": "Simplify the file upload flow",
-  "repository": "git@github.com:arnaud-zg/lazy-upload.git",
   "main": "dist/index.js",
   "module": "dist/lazy-upload.esm.js",
   "typings": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arnaud-zg/lazy-upload.git"
+  },
+  "homepage": "https://github.com/arnaud-zg/lazy-upload",
+  "bugs": {
+    "url": "https://github.com/arnaud-zg/lazy-upload/issues"
+  },
+  "keywords": [
+    "lazy",
+    "upload"
+  ],
   "files": [
     "dist"
   ],
