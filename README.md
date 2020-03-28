@@ -5,6 +5,7 @@ lazy-upload is a library which aims to simplify the file upload flow
 ## 🚩 Table of Contents
 
 - [Packages](#-packages)
+- [Playground](#-playground)
 - [Browser Support](#-browser-support)
 - [License](#-license)
 
@@ -15,6 +16,10 @@ lazy-upload is a library which aims to simplify the file upload flow
 | Name                     | Description                   |
 | ------------------------ | ----------------------------- |
 | [`lazy-upload`](library) | Simplify the file upload flow |
+
+## 🎨 Playground
+
+- [**Storybook**](https://arnaud-zg.github.io/lazy-upload/)
 
 ## 🌏 Browser Support
 
