@@ -1,0 +1,16 @@
+{
+  "bumpFiles": [
+    {
+      "filename": "./package.json",
+      "type": "json"
+    },
+    {
+      "filename": "./playground/package.json",
+      "type": "json"
+    },
+    {
+      "filename": "./library/package.json",
+      "type": "json"
+    }
+  ]
+}
