@@ -95,7 +95,6 @@ Deployment is done with Travis.
 ## Built With
 
 - [TSDX](https://github.com/palmerhq/tsdx) - TSDX
-- [Storybook](https://github.com/storybookjs/storybook) - Storybook
 
 ## Contributing
 
