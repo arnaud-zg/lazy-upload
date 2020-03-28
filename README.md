@@ -19,7 +19,7 @@ lazy-upload is a library which aims to simplify the file upload flow
 
 ## 🎨 Playground
 
-- [**Storybook**](https://arnaud-zg.github.io/lazy-upload/)
+- [**Storybook**](https://arnaud-zg.github.io/lazy-upload/): A storybook playground for `lazy-upload`
 
 ## 🌏 Browser Support
 
