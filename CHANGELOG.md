@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/arnaud-zg/lazy-upload/compare/v0.2.0...v0.2.1) (2020-05-03)
+
+
+### Bug Fixes
+
+* update package.jsn ([f676a13](https://github.com/arnaud-zg/lazy-upload/commit/f676a134fbd395ff41e1719f370c49e767ef16f6))
+
 ## [0.2.0](https://github.com/arnaud-zg/lazy-upload/compare/v0.1.0...v0.2.0) (2020-03-28)
 
 
