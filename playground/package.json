@@ -1,6 +1,6 @@
 {
   "name": "playground-lazy-upload",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Playground of lazy-upload",
   "repository": "git@github.com:arnaud-zg/lazy-upload.git",
   "main": "index.js",
