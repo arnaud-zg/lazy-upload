@@ -1,6 +1,6 @@
 {
   "name": "lazy-upload",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Simplify the file upload flow",
   "main": "dist/index.js",
   "module": "dist/lazy-upload.esm.js",
